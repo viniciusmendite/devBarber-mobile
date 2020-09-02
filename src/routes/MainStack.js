@@ -8,7 +8,11 @@ import SignUp from '../pages/SignUp';
 const {Navigator, Screen} = createStackNavigator();
 
 const MainStack = () => (
-  <Navigator>
+  <Navigator
+    initialRouteName="Preload"
+    screenOptions={{
+      headerShown: false,
+    }}>
     <Screen name="Preload" component={Preload} />
     <Screen name="SignIn" component={SignIn} />
     <Screen name="SignUp" component={SignUp} />
