@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {StatusBar} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 import {
   Container,
@@ -18,8 +19,19 @@ import LockIcon from '../../assets/lock.svg';
 import SignInput from '../../components/SignInput';
 
 const SignIn = () => {
+  const navigation = useNavigation();
+
   const [emailField, setEmailField] = useState('');
   const [passwordField, setPasswordField] = useState('');
+
+  const handleMessageButtonClick = () => {
+    navigation.reset({
+      routes: [{name: 'SignUp'}],
+    });
+  };
+
+  const handleSignClick = () => {};
+
   return (
     <Container>
       <StatusBar backgroundColor="#63c2d1" barStyle="light-content" />
@@ -40,12 +52,12 @@ const SignIn = () => {
           password={true}
         />
 
-        <CustomButton>
+        <CustomButton onPress={handleSignClick}>
           <CustomButtonText>Login</CustomButtonText>
         </CustomButton>
       </InputArea>
 
-      <SignMessageButton>
+      <SignMessageButton onPress={handleMessageButtonClick}>
         <SignMessageButtonText>
           Ainda não possui uma conta?
         </SignMessageButtonText>
