@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import {StatusBar} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {useNavigation} from '@react-navigation/native';
 
@@ -21,6 +22,7 @@ const Preload = () => {
   }, []);
   return (
     <Container>
+      <StatusBar backgroundColor="#63c2d1" barStyle="light-content" />
       <BarberLogo width="100%" height="160" />
       <LoadingIcon size="large" color="#FFF" />
     </Container>
