@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
-import {StatusBar} from 'react-native';
+import React, {useState, useContext} from 'react';
+import {StatusBar, Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import {
   Container,
@@ -12,6 +13,9 @@ import {
   SignMessageButtonTextBold,
 } from './styles';
 
+import api from '../../services/api';
+import {UserContext} from '../../contexts/UserContext';
+
 import BarberLogo from '../../assets/barber.svg';
 import PersonIcon from '../../assets/person.svg';
 import EmailIcon from '../../assets/email.svg';
@@ -20,6 +24,7 @@ import LockIcon from '../../assets/lock.svg';
 import SignInput from '../../components/SignInput';
 
 const SignUp = () => {
+  const {dispatch: userDispatch} = useContext(UserContext);
   const navigation = useNavigation();
 
   const [nameField, setNameField] = useState('');
@@ -32,7 +37,29 @@ const SignUp = () => {
     });
   };
 
-  const handleSignClick = () => {};
+  const handleSignClick = async () => {
+    if (nameField !== '' && emailField !== '' && passwordField !== '') {
+      let response = await api.signUp(nameField, emailField, passwordField);
+      if (response.token) {
+        await AsyncStorage.setItem('token', response.token);
+
+        userDispatch({
+          type: 'setAvatar',
+          payload: {
+            avatar: response.data.avatar,
+          },
+        });
+
+        navigation.reset({
+          routes: [{name: 'MainTab'}],
+        });
+      } else {
+        Alert.alert('Aviso', 'Erro: ' + response.error);
+      }
+    } else {
+      Alert.alert('Aviso', 'Preencha os campos!');
+    }
+  };
 
   return (
     <Container>
