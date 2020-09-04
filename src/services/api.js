@@ -1,4 +1,5 @@
-const BASE_API = 'https://api.b7web.com.br/devbarber/api';
+import {BASE_URL} from '../Utils/BaseUrl';
+const BASE_API = BASE_URL;
 
 export default {
   checkToken: async (token) => {
