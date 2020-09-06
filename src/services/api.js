@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import {BASE_URL} from '../Utils/BaseUrl';
 const BASE_API = BASE_URL;
 
@@ -35,6 +36,12 @@ export default {
       },
       body: JSON.stringify({name, email, password}),
     });
+    const json = await req.json();
+    return json;
+  },
+  getBarbers: async () => {
+    const token = await AsyncStorage.getItem('token');
+    const req = await fetch(`${BASE_API}/barbers?token=${token}`);
     const json = await req.json();
     return json;
   },
