@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {StatusBar, Platform} from 'react-native';
+import {StatusBar, Platform, RefreshControl} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {request, PERMISSIONS} from 'react-native-permissions';
 import GeoLocation from '@react-native-community/geolocation';
@@ -30,6 +30,8 @@ const Home = () => {
   const [coords, setCoords] = useState(null);
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
+
+  const [refreshing, setRefreshing] = useState(false);
 
   const handleLocationFinder = async () => {
     setCoords(null);
@@ -71,10 +73,21 @@ const Home = () => {
     getBarbers();
   }, []);
 
+  const handleOnRefreshing = () => {
+    setRefreshing(false);
+    getBarbers();
+  };
+
   return (
     <Container>
       <StatusBar backgroundColor="#63c2d1" barStyle="light-content" />
-      <Scroller>
+      <Scroller
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={handleOnRefreshing}
+          />
+        }>
         <HeaderArea>
           <HeaderTitle numberOfLines={2}>
             Encontre o seu barbeiro favorito
