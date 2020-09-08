@@ -1,7 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 
-import {Container} from './styles';
+import {
+  Container,
+  Scroller,
+  SwiperPhoto,
+  SwiperDot,
+  SwiperItem,
+  SwiperImage,
+  FakeSwiper,
+  PageBody,
+  UserInfoArea,
+  ServiceArea,
+  TestimonialArea,
+} from './styles';
 
 import api from '../../services/api';
 
@@ -31,7 +43,33 @@ const Barber = () => {
     getBarberInfo();
   }, []);
 
-  return <Container />;
+  return (
+    <Container>
+      <Scroller>
+        {userInfo.photos && userInfo.photos.length > 0 ? (
+          <SwiperPhoto
+            dot={<SwiperDot active={false} />}
+            activeDot={<SwiperDot active={true} />}
+            autoplay={true}>
+            {userInfo.photos.map((item, index) => (
+              <SwiperItem>
+                <SwiperImage source={{uri: item.url}} resiveMode="cover" />
+              </SwiperItem>
+            ))}
+          </SwiperPhoto>
+        ) : (
+          <FakeSwiper />
+        )}
+        <PageBody>
+          <UserInfoArea />
+
+          <ServiceArea />
+
+          <TestimonialArea />
+        </PageBody>
+      </Scroller>
+    </Container>
+  );
 };
 
 export default Barber;
