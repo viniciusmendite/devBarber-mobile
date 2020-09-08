@@ -82,7 +82,7 @@ export const UserFavoriteButton = styled.TouchableOpacity`
   width: 40px;
   height: 40px;
   background-color: #fff;
-  border: 2px solid #999;
+  elevation: 4;
   border-radius: 20px;
   justify-content: center;
   align-items: center;
