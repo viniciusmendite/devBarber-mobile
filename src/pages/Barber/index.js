@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {StatusBar} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 
 import {
@@ -11,11 +12,21 @@ import {
   FakeSwiper,
   PageBody,
   UserInfoArea,
+  UserAvatar,
+  UserInfo,
+  UserInfoName,
+  UserFavoriteButton,
   ServiceArea,
   TestimonialArea,
+  BackButton,
 } from './styles';
 
 import api from '../../services/api';
+
+import Stars from '../../components/Stars';
+
+import FavoriteIcon from '../../assets/favorite.svg';
+import BackIcon from '../../assets/back.svg';
 
 const Barber = () => {
   const navigation = useNavigation();
@@ -43,8 +54,17 @@ const Barber = () => {
     getBarberInfo();
   }, []);
 
+  const handleGoBack = () => {
+    navigation.goBack();
+  };
+
   return (
     <Container>
+      <StatusBar
+        backgroundColor="transparent"
+        translucent={true}
+        hidden={true}
+      />
       <Scroller>
         {userInfo.photos && userInfo.photos.length > 0 ? (
           <SwiperPhoto
@@ -61,13 +81,25 @@ const Barber = () => {
           <FakeSwiper />
         )}
         <PageBody>
-          <UserInfoArea />
+          <UserInfoArea>
+            <UserAvatar source={{uri: userInfo.avatar}} />
+            <UserInfo>
+              <UserInfoName>{userInfo.name}</UserInfoName>
+              <Stars stars={userInfo.stars} showNumber={true} />
+            </UserInfo>
+            <UserFavoriteButton>
+              <FavoriteIcon width="24" height="24" fill="#f00" />
+            </UserFavoriteButton>
+          </UserInfoArea>
 
           <ServiceArea />
 
           <TestimonialArea />
         </PageBody>
       </Scroller>
+      <BackButton onPress={handleGoBack}>
+        <BackIcon width="40" height="40" fill="#fff" />
+      </BackButton>
     </Container>
   );
 };
