@@ -16,9 +16,17 @@ import {
   UserInfo,
   UserInfoName,
   UserFavoriteButton,
+  ServiceTitle,
   ServiceArea,
+  ServiceItem,
+  ServiceInfo,
+  ServiceName,
+  ServicePrice,
+  ServiceChooseButton,
+  ServiceChooseButtonText,
   TestimonialArea,
   BackButton,
+  LoadingIcon,
 } from './styles';
 
 import api from '../../services/api';
@@ -72,7 +80,7 @@ const Barber = () => {
             activeDot={<SwiperDot active={true} />}
             autoplay={true}>
             {userInfo.photos.map((item, index) => (
-              <SwiperItem>
+              <SwiperItem key={index}>
                 <SwiperImage source={{uri: item.url}} resiveMode="cover" />
               </SwiperItem>
             ))}
@@ -87,12 +95,29 @@ const Barber = () => {
               <UserInfoName>{userInfo.name}</UserInfoName>
               <Stars stars={userInfo.stars} showNumber={true} />
             </UserInfo>
+
             <UserFavoriteButton>
               <FavoriteIcon width="24" height="24" fill="#f00" />
             </UserFavoriteButton>
           </UserInfoArea>
 
-          <ServiceArea />
+          {loading && <LoadingIcon size="large" color="#000" />}
+
+          <ServiceArea>
+            <ServiceTitle>Lista de Serviços</ServiceTitle>
+            {userInfo.services.map((item, index) => (
+              <ServiceItem key={index}>
+                <ServiceInfo>
+                  <ServiceName>{item.name}</ServiceName>
+                  <ServicePrice>R$ {item.price}</ServicePrice>
+                </ServiceInfo>
+
+                <ServiceChooseButton>
+                  <ServiceChooseButtonText>Agendar</ServiceChooseButtonText>
+                </ServiceChooseButton>
+              </ServiceItem>
+            ))}
+          </ServiceArea>
 
           <TestimonialArea />
         </PageBody>

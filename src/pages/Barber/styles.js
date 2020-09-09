@@ -93,6 +93,20 @@ export const UserFavoriteButton = styled.TouchableOpacity`
 
 export const ServiceArea = styled.View``;
 
+export const ServiceTitle = styled.Text``;
+
+export const ServiceItem = styled.View``;
+
+export const ServiceInfo = styled.View``;
+
+export const ServiceName = styled.Text``;
+
+export const ServicePrice = styled.Text``;
+
+export const ServiceChooseButton = styled.TouchableOpacity``;
+
+export const ServiceChooseButtonText = styled.Text``;
+
 export const TestimonialArea = styled.View``;
 
 export const BackButton = styled.TouchableOpacity`
@@ -100,4 +114,8 @@ export const BackButton = styled.TouchableOpacity`
   top: 10px;
   left: 5px;
   z-index: 15;
+`;
+
+export const LoadingIcon = styled.ActivityIndicator`
+  margin-top: 50px;
 `;
