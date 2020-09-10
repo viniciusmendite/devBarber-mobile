@@ -38,6 +38,7 @@ import api from '../../services/api';
 
 import Stars from '../../components/Stars';
 
+import FavoriteFullIcon from '../../assets/favorite_full.svg';
 import FavoriteIcon from '../../assets/favorite.svg';
 import BackIcon from '../../assets/back.svg';
 import NavPrevIcon from '../../assets/nav_prev.svg';
@@ -54,6 +55,7 @@ const Barber = () => {
     stars: route.params.stars,
   });
   const [loading, setLoading] = useState(false);
+  const [favorited, setFavorited] = useState(false);
 
   useEffect(() => {
     const getBarberInfo = async () => {
@@ -61,6 +63,7 @@ const Barber = () => {
       let json = await api.getBarber(userInfo.id);
       if (json.error === '') {
         setUserInfo(json.data);
+        setFavorited(json.data.favorited);
       } else {
         alert('Erro: ' + json.error);
       }
@@ -71,6 +74,11 @@ const Barber = () => {
 
   const handleGoBack = () => {
     navigation.goBack();
+  };
+
+  const handleFavoriteBarber = () => {
+    setFavorited(!favorited);
+    api.setFavorite(userInfo.id);
   };
 
   return (
@@ -103,8 +111,12 @@ const Barber = () => {
               <Stars stars={userInfo.stars} showNumber={true} />
             </UserInfo>
 
-            <UserFavoriteButton>
-              <FavoriteIcon width="24" height="24" fill="#f00" />
+            <UserFavoriteButton onPress={handleFavoriteBarber}>
+              {favorited ? (
+                <FavoriteFullIcon width="24" height="24" fill="#f00" />
+              ) : (
+                <FavoriteIcon width="24" height="24" fill="#f00" />
+              )}
             </UserFavoriteButton>
           </UserInfoArea>
 
