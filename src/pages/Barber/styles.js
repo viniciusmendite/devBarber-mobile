@@ -91,21 +91,51 @@ export const UserFavoriteButton = styled.TouchableOpacity`
   margin-top: 16px;
 `;
 
-export const ServiceArea = styled.View``;
+export const ServiceArea = styled.View`
+  margin-top: 30px;
+`;
 
-export const ServiceTitle = styled.Text``;
+export const ServicesTitle = styled.Text`
+  font-size: 18px;
+  font-weight: bold;
+  color: #268596;
+  margin-left: 30px;
+  margin-bottom: 20px;
+`;
 
-export const ServiceItem = styled.View``;
+export const ServiceItem = styled.View`
+  flex-direction: row;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 20px;
+`;
 
-export const ServiceInfo = styled.View``;
+export const ServiceInfo = styled.View`
+  flex: 1;
+`;
 
-export const ServiceName = styled.Text``;
+export const ServiceName = styled.Text`
+  font-size: 16px;
+  font-weight: bold;
+  color: #268596;
+`;
 
-export const ServicePrice = styled.Text``;
+export const ServicePrice = styled.Text`
+  font-size: 14px;
+  color: #268596;
+`;
 
-export const ServiceChooseButton = styled.TouchableOpacity``;
+export const ServiceChooseButton = styled.TouchableOpacity`
+  background-color: #4eadbe;
+  padding: 10px 15px;
+  border-radius: 10px;
+`;
 
-export const ServiceChooseButtonText = styled.Text``;
+export const ServiceChooseButtonText = styled.Text`
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+`;
 
 export const TestimonialArea = styled.View``;
 

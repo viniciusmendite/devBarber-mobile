@@ -16,7 +16,7 @@ import {
   UserInfo,
   UserInfoName,
   UserFavoriteButton,
-  ServiceTitle,
+  ServicesTitle,
   ServiceArea,
   ServiceItem,
   ServiceInfo,
@@ -103,21 +103,22 @@ const Barber = () => {
 
           {loading && <LoadingIcon size="large" color="#000" />}
 
-          <ServiceArea>
-            <ServiceTitle>Lista de Serviços</ServiceTitle>
-            {userInfo.services.map((item, index) => (
-              <ServiceItem key={index}>
-                <ServiceInfo>
-                  <ServiceName>{item.name}</ServiceName>
-                  <ServicePrice>R$ {item.price}</ServicePrice>
-                </ServiceInfo>
-
-                <ServiceChooseButton>
-                  <ServiceChooseButtonText>Agendar</ServiceChooseButtonText>
-                </ServiceChooseButton>
-              </ServiceItem>
-            ))}
-          </ServiceArea>
+          {userInfo.services && (
+            <ServiceArea>
+              <ServicesTitle>Lista de Serviços</ServicesTitle>
+              {userInfo.services.map((item, index) => (
+                <ServiceItem key={index}>
+                  <ServiceInfo>
+                    <ServiceName>{item.name}</ServiceName>
+                    <ServicePrice>R$ {item.price}</ServicePrice>
+                  </ServiceInfo>
+                  <ServiceChooseButton>
+                    <ServiceChooseButtonText>Agendar</ServiceChooseButtonText>
+                  </ServiceChooseButton>
+                </ServiceItem>
+              ))}
+            </ServiceArea>
+          )}
 
           <TestimonialArea />
         </PageBody>
