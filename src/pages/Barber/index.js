@@ -25,6 +25,11 @@ import {
   ServiceChooseButton,
   ServiceChooseButtonText,
   TestimonialArea,
+  SwiperTestimonial,
+  TestimonialItem,
+  TestimonialInfo,
+  TestimonialName,
+  TestimonialBody,
   BackButton,
   LoadingIcon,
 } from './styles';
@@ -35,6 +40,8 @@ import Stars from '../../components/Stars';
 
 import FavoriteIcon from '../../assets/favorite.svg';
 import BackIcon from '../../assets/back.svg';
+import NavPrevIcon from '../../assets/nav_prev.svg';
+import NavNextIcon from '../../assets/nav_next.svg';
 
 const Barber = () => {
   const navigation = useNavigation();
@@ -120,7 +127,25 @@ const Barber = () => {
             </ServiceArea>
           )}
 
-          <TestimonialArea />
+          {userInfo.testimonials && userInfo.testimonials.length > 0 && (
+            <TestimonialArea>
+              <SwiperTestimonial
+                showsPagination={false}
+                showsButtons={true}
+                prevButton={<NavPrevIcon width="35" height="35" fill="#000" />}
+                nextButton={<NavNextIcon width="35" height="35" fill="#000" />}>
+                {userInfo.testimonials.map((item, index) => (
+                  <TestimonialItem key={index}>
+                    <TestimonialInfo>
+                      <TestimonialName>{item.name}</TestimonialName>
+                      <Stars stars={item.rate} showNumber={false} />
+                    </TestimonialInfo>
+                    <TestimonialBody>{item.body}</TestimonialBody>
+                  </TestimonialItem>
+                ))}
+              </SwiperTestimonial>
+            </TestimonialArea>
+          )}
         </PageBody>
       </Scroller>
       <BackButton onPress={handleGoBack}>
