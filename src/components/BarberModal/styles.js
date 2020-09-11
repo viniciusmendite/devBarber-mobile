@@ -15,3 +15,8 @@ export const ModalBody = styled.View`
   min-height: 300px;
   padding: 10px 20px 40px 20px;
 `;
+
+export const CloseButton = styled.TouchableOpacity`
+  width: 40px;
+  height: 40px;
+`;
