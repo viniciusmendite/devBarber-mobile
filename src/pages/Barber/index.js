@@ -37,6 +37,7 @@ import {
 import api from '../../services/api';
 
 import Stars from '../../components/Stars';
+import BarberModal from '../../components/BarberModal';
 
 import FavoriteFullIcon from '../../assets/favorite_full.svg';
 import FavoriteIcon from '../../assets/favorite.svg';
@@ -56,6 +57,8 @@ const Barber = () => {
   });
   const [loading, setLoading] = useState(false);
   const [favorited, setFavorited] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const getBarberInfo = async () => {
@@ -70,7 +73,7 @@ const Barber = () => {
       setLoading(false);
     };
     getBarberInfo();
-  }, []);
+  }, [userInfo.id]);
 
   const handleGoBack = () => {
     navigation.goBack();
@@ -79,6 +82,11 @@ const Barber = () => {
   const handleFavoriteBarber = () => {
     setFavorited(!favorited);
     api.setFavorite(userInfo.id);
+  };
+
+  const handleServiceChoose = (indexService) => {
+    setSelectedService(indexService);
+    setShowModal(true);
   };
 
   return (
@@ -131,7 +139,8 @@ const Barber = () => {
                     <ServiceName>{item.name}</ServiceName>
                     <ServicePrice>R$ {item.price}</ServicePrice>
                   </ServiceInfo>
-                  <ServiceChooseButton>
+                  <ServiceChooseButton
+                    onPress={() => handleServiceChoose(index)}>
                     <ServiceChooseButtonText>Agendar</ServiceChooseButtonText>
                   </ServiceChooseButton>
                 </ServiceItem>
@@ -163,6 +172,12 @@ const Barber = () => {
       <BackButton onPress={handleGoBack}>
         <BackIcon width="40" height="40" fill="#fff" />
       </BackButton>
+      <BarberModal
+        show={showModal}
+        setShow={setShowModal}
+        user={userInfo}
+        service={selectedService}
+      />
     </Container>
   );
 };
