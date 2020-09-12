@@ -1,7 +1,16 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 
-import {Modal, ModalArea, ModalBody, CloseButton} from './styles';
+import {
+  Modal,
+  ModalArea,
+  ModalBody,
+  CloseButton,
+  ModalItem,
+  UserInfo,
+  UserAvatar,
+  UserName,
+} from './styles';
 
 import ExpandIcon from '../../assets/expand.svg';
 
@@ -21,6 +30,12 @@ const BarberModal = ({show, setShow, user, service}) => {
           <CloseButton onPress={handleCloseModal}>
             <ExpandIcon width="40" height="40" fill="#000" />
           </CloseButton>
+          <ModalItem>
+            <UserInfo>
+              <UserAvatar source={{uri: user.avatar}} />
+              <UserName>{user.name}</UserName>
+            </UserInfo>
+          </ModalItem>
         </ModalBody>
       </ModalArea>
     </Modal>

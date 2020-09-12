@@ -20,3 +20,27 @@ export const CloseButton = styled.TouchableOpacity`
   width: 40px;
   height: 40px;
 `;
+
+export const ModalItem = styled.View`
+  background-color: #fff;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  padding: 10px;
+`;
+
+export const UserInfo = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const UserAvatar = styled.Image`
+  width: 56px;
+  height: 56px;
+  border-radius: 20px;
+  margin-right: 15px;
+`;
+
+export const UserName = styled.Name`
+  font-size: 18px;
+  color: #000;
+`;
